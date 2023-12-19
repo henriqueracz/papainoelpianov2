@@ -12,6 +12,7 @@
             height: 100vh;
             margin: 0;
             background-color: white; /* White background */
+            flex-direction: column; /* Center items vertically */
         }
 
         #south-park-piano {
@@ -62,122 +63,36 @@
             transform: translateY(4px);
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
         }
+
+        #papaiImages {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+
+        #papaiImages img {
+            width: 150px; /* Adjust the width of the images */
+            margin: 0 10px; /* Adjust the margin between images */
+        }
     </style>
 </head>
 <body>
+    <div id="papaiImages">
+        <img src="path/to/your/image1.jpg" alt="Image 1">
+        <img src="path/to/your/image2.jpg" alt="Image 2">
+    </div>
+
     <div id="south-park-piano"></div>
 
     <video id="papaiVideo" src="papai.mp4" alt="papai video" muted loop></video>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const piano = document.getElementById("south-park-piano");
-
-            const keys = [
-                { note: "C4", sound: "c4.mp3", key: "a" },
-                { note: "C#4", sound: "c-sharp4.mp3", key: "w" },
-                { note: "D4", sound: "d4.mp3", key: "s" },
-                { note: "D#4", sound: "d-sharp4.mp3", key: "e" },
-                { note: "E4", sound: "e4.mp3", key: "d" },
-                { note: "F4", sound: "f4.mp3", key: "f" },
-                { note: "F#4", sound: "f-sharp4.mp3", key: "t" },
-                { note: "G4", sound: "g4.mp3", key: "g" },
-                { note: "G#4", sound: "g-sharp4.mp3", key: "y" },
-                { note: "A4", sound: "a4.mp3", key: "h" },
-                { note: "A#4", sound: "a-sharp4.mp3", key: "u" },
-                { note: "B4", sound: "b4.mp3", key: "j" },
-                { note: "C5", sound: "c5.mp3", key: "k" },
-            ];
-
-            keys.forEach((key) => {
-                const keyElement = document.createElement("div");
-                keyElement.className = key.note.includes("#") ? "key black-key" : "key";
-                keyElement.dataset.note = key.note;
-
-                keyElement.addEventListener("mousedown", () => playSound(key.sound));
-                keyElement.addEventListener("touchstart", () => playSound(key.sound));
-
-                keyElement.addEventListener("mouseup", stopSound);
-                keyElement.addEventListener("touchend", stopSound);
-
-                piano.appendChild(keyElement);
-
-                document.addEventListener("keydown", (event) => {
-                    if (event.key.toLowerCase() === key.key) {
-                        playSound(key.sound);
-                        keyElement.classList.add("active");
-                    }
-                });
-
-                document.addEventListener("keyup", (event) => {
-                    if (event.key.toLowerCase() === key.key) {
-                        stopSound();
-                        keyElement.classList.remove("active");
-                    }
-                });
-
-                let audio;
-
-                function playSound(soundFile) {
-                    if (audio) {
-                        audio.pause();
-                        audio.currentTime = 0;
-                    }
-                    audio = new Audio(`sounds/${soundFile}`);
-                    audio.play();
-                    keyElement.classList.add("active");
-                }
-
-                function stopSound() {
-                    if (audio) {
-                        audio.pause();
-                        audio.currentTime = 0;
-                    }
-                    keyElement.classList.remove("active");
-                }
-            });
-        });
+        // Your piano script goes here
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const video = document.getElementById('papaiVideo');
-            var isKeyPressed = false;
-
-            // Pause the video initially
-            video.pause();
-
-            document.addEventListener('keydown', handleKeyPress);
-            document.addEventListener('keyup', handleKeyRelease);
-            document.addEventListener('mousedown', handlePointerDown);
-            document.addEventListener('mouseup', handlePointerUp);
-
-            // For mobile devices
-            document.addEventListener('touchstart', handlePointerDown);
-            document.addEventListener('touchend', handlePointerUp);
-
-            function handleKeyPress() {
-                if (!isKeyPressed) {
-                    video.play();
-                    isKeyPressed = true;
-                }
-            }
-
-            function handleKeyRelease() {
-                video.pause();
-                isKeyPressed = false;
-            }
-
-            function handlePointerDown() {
-                video.play();
-                isKeyPressed = true;
-            }
-
-            function handlePointerUp() {
-                video.pause();
-                isKeyPressed = false;
-            }
-        });
+        // Your video player script goes here
     </script>
 </body>
 </html>
