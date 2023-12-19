@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Child's Piano</title>
+  <title>Child's Piano with Video Player</title>
   <style>
     body {
       display: flex;
@@ -134,6 +134,47 @@
           keyElement.classList.remove("active");
         }
       });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById('video');
+      var isKeyPressed = false;
+
+      // Pause the video initially
+      video.pause();
+
+      document.addEventListener('keydown', handleKeyPress);
+      document.addEventListener('keyup', handleKeyRelease);
+      document.addEventListener('mousedown', handlePointerDown);
+      document.addEventListener('mouseup', handlePointerUp);
+
+      // For mobile devices
+      document.addEventListener('touchstart', handlePointerDown);
+      document.addEventListener('touchend', handlePointerUp);
+
+      function handleKeyPress() {
+        if (!isKeyPressed) {
+          video.play();
+          isKeyPressed = true;
+        }
+      }
+
+      function handleKeyRelease() {
+        video.pause();
+        isKeyPressed = false;
+      }
+
+      function handlePointerDown() {
+        video.play();
+        isKeyPressed = true;
+      }
+
+      function handlePointerUp() {
+        video.pause();
+        isKeyPressed = false;
+      }
     });
   </script>
 </body>
