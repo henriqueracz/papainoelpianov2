@@ -18,6 +18,7 @@
         #papaiVideo {
             width: 80%; /* Adjust the width percentage based on your preference */
             max-width: 600px; /* Adjust the maximum width for better responsiveness */
+            margin-bottom: 20px; /* Adjust the margin between video and piano */
         }
 
         #south-park-piano {
@@ -25,7 +26,6 @@
             flex-wrap: wrap;
             width: 80%; /* Adjust the width percentage based on your preference */
             max-width: 600px; /* Adjust the maximum width for better responsiveness */
-            margin: 20px 0; /* Adjust the margin between video and piano */
         }
 
         .key {
@@ -74,10 +74,6 @@
     <video id="papaiVideo" src="papai.mp4" alt="papai video" muted loop></video>
 
     <div id="south-park-piano"></div>
-
-    <script>
-        // Your piano script goes here
-    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
