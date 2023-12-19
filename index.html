@@ -15,12 +15,17 @@
             flex-direction: column; /* Center items vertically */
         }
 
+        #papaiVideo {
+            width: 80%; /* Adjust the width percentage based on your preference */
+            max-width: 600px; /* Adjust the maximum width for better responsiveness */
+        }
+
         #south-park-piano {
             display: flex;
             flex-wrap: wrap;
             width: 80%; /* Adjust the width percentage based on your preference */
             max-width: 600px; /* Adjust the maximum width for better responsiveness */
-            margin: 0 auto; /* Center the piano on the screen */
+            margin: 20px 0; /* Adjust the margin between video and piano */
         }
 
         .key {
@@ -63,36 +68,56 @@
             transform: translateY(4px);
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
         }
-
-        #papaiImages {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px; /* Adjust the margin as needed */
-        }
-
-        #papaiImages img {
-            width: 150px; /* Adjust the width of the images */
-            margin: 0 10px; /* Adjust the margin between images */
-        }
     </style>
 </head>
 <body>
-    <div id="papaiImages">
-        <img src="path/to/your/image1.jpg" alt="Image 1">
-        <img src="path/to/your/image2.jpg" alt="Image 2">
-    </div>
+    <video id="papaiVideo" src="papai.mp4" alt="papai video" muted loop></video>
 
     <div id="south-park-piano"></div>
-
-    <video id="papaiVideo" src="papai.mp4" alt="papai video" muted loop></video>
 
     <script>
         // Your piano script goes here
     </script>
 
     <script>
-        // Your video player script goes here
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('papaiVideo');
+            var isKeyPressed = false;
+
+            // Pause the video initially
+            video.pause();
+
+            document.addEventListener('keydown', handleKeyPress);
+            document.addEventListener('keyup', handleKeyRelease);
+            document.addEventListener('mousedown', handlePointerDown);
+            document.addEventListener('mouseup', handlePointerUp);
+
+            // For mobile devices
+            document.addEventListener('touchstart', handlePointerDown);
+            document.addEventListener('touchend', handlePointerUp);
+
+            function handleKeyPress() {
+                if (!isKeyPressed) {
+                    video.play();
+                    isKeyPressed = true;
+                }
+            }
+
+            function handleKeyRelease() {
+                video.pause();
+                isKeyPressed = false;
+            }
+
+            function handlePointerDown() {
+                video.play();
+                isKeyPressed = true;
+            }
+
+            function handlePointerUp() {
+                video.pause();
+                isKeyPressed = false;
+            }
+        });
     </script>
 </body>
 </html>
